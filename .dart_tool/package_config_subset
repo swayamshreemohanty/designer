@@ -1,7 +1,7 @@
 designer
 2.19
-file:///C:/SwayamDrive/FlutterProjects/Android%20Application/ColourMoon/droov/packages/designer/
-file:///C:/SwayamDrive/FlutterProjects/Android%20Application/ColourMoon/droov/packages/designer/lib/
+file:///C:/SwayamDrive/FlutterProjects/Packages/designer/
+file:///C:/SwayamDrive/FlutterProjects/Packages/designer/lib/
 async
 2.18
 file:///C:/Users/Swayamshree%20Mohanty/AppData/Local/Pub/Cache/hosted/pub.dev/async-2.10.0/
@@ -62,6 +62,10 @@ flutter_typeahead
 2.19
 file:///C:/Users/Swayamshree%20Mohanty/AppData/Local/Pub/Cache/hosted/pub.dev/flutter_typeahead-4.3.7/
 file:///C:/Users/Swayamshree%20Mohanty/AppData/Local/Pub/Cache/hosted/pub.dev/flutter_typeahead-4.3.7/lib/
+fluttertoast
+2.12
+file:///C:/Users/Swayamshree%20Mohanty/AppData/Local/Pub/Cache/hosted/pub.dev/fluttertoast-8.2.1/
+file:///C:/Users/Swayamshree%20Mohanty/AppData/Local/Pub/Cache/hosted/pub.dev/fluttertoast-8.2.1/lib/
 js
 2.16
 file:///C:/Users/Swayamshree%20Mohanty/AppData/Local/Pub/Cache/hosted/pub.dev/js-0.6.5/
