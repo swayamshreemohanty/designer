@@ -81,6 +81,8 @@ class ThemeTextFormField extends StatelessWidget {
           maxLines: maxLines,
           onTap: onTap,
           decoration: InputDecoration(
+            contentPadding: contentPadding ??
+                const EdgeInsets.symmetric(vertical: 5, horizontal: 8),
             suffixIcon: suffixIcon,
             prefix: prefix,
             prefixIcon: prefixIcon,
