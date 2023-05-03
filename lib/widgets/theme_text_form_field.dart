@@ -23,6 +23,9 @@ class ThemeTextFormField extends StatelessWidget {
   final bool obscureText;
   final double topPadding;
   final int? maxLength;
+  final EdgeInsetsGeometry? contentPadding;
+  final TextStyle? hintStyle;
+  final TextStyle? style;
 
   ThemeTextFormField({
     Key? key,
@@ -46,6 +49,9 @@ class ThemeTextFormField extends StatelessWidget {
     this.readOnly = false,
     this.obscureText = false,
     this.maxLength,
+    this.contentPadding,
+    this.hintStyle,
+    this.style,
   }) : super(key: key);
 
   final OutlineInputBorder activeBorderStyle = OutlineInputBorder(
