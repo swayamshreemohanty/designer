@@ -2,7 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-class ThemeTextFormField extends StatelessWidget {
+class ThemeTextFormField extends StatefulWidget {
   final TextEditingController? controller;
   final TextInputType? keyboardType;
   final TextInputAction? textInputAction;
@@ -21,9 +21,10 @@ class ThemeTextFormField extends StatelessWidget {
   final Widget? prefix;
   final bool readOnly;
   final bool obscureText;
-  final double topPadding;
   final int? maxLength;
+  final double? borderRadius;
   final EdgeInsetsGeometry? contentPadding;
+  final EdgeInsetsGeometry? textFieldPadding;
   final TextStyle? hintStyle;
   final TextStyle? style;
 
@@ -45,49 +46,66 @@ class ThemeTextFormField extends StatelessWidget {
     this.suffixIcon,
     this.prefix,
     this.prefixIcon,
-    this.topPadding = 8,
     this.readOnly = false,
     this.obscureText = false,
     this.maxLength,
+    this.borderRadius,
     this.contentPadding,
+    this.textFieldPadding,
     this.hintStyle,
     this.style,
   }) : super(key: key);
 
-  final OutlineInputBorder activeBorderStyle = OutlineInputBorder(
-    borderSide: BorderSide(width: 1, color: Colors.grey.shade400),
-    borderRadius: BorderRadius.circular(15),
-  );
-  final OutlineInputBorder deActiveBorderStyle = OutlineInputBorder(
-    borderSide: BorderSide(width: 1, color: Colors.grey.shade200),
-    borderRadius: BorderRadius.circular(15),
-  );
+  @override
+  State<ThemeTextFormField> createState() => _ThemeTextFormFieldState();
+}
+
+class _ThemeTextFormFieldState extends State<ThemeTextFormField> {
+  late OutlineInputBorder activeBorderStyle;
+  late OutlineInputBorder deActiveBorderStyle;
+  @override
+  void initState() {
+    super.initState();
+
+    activeBorderStyle = OutlineInputBorder(
+      borderSide: BorderSide(width: 1, color: Colors.grey.shade400),
+      borderRadius: BorderRadius.circular(widget.borderRadius ?? 10),
+    );
+
+    deActiveBorderStyle = OutlineInputBorder(
+      borderSide: BorderSide(width: 1, color: Colors.grey.shade200),
+      borderRadius: BorderRadius.circular(widget.borderRadius ?? 10),
+    );
+  }
+
   @override
   Widget build(BuildContext context) => Padding(
-        padding: EdgeInsets.only(top: topPadding),
+        padding: widget.textFieldPadding == null
+            ? EdgeInsets.zero
+            : widget.textFieldPadding!,
         child: TextFormField(
-          maxLength: maxLength,
-          obscureText: obscureText,
-          readOnly: readOnly,
-          enabled: enabled,
-          controller: controller,
-          keyboardType: keyboardType,
-          textInputAction: textInputAction,
-          textCapitalization: textCapitalization,
-          autofillHints: autofillHints,
-          inputFormatters: inputFormatters,
-          validator: validator,
-          onChanged: onChanged,
-          maxLines: maxLines,
-          onTap: onTap,
+          maxLength: widget.maxLength,
+          obscureText: widget.obscureText,
+          readOnly: widget.readOnly,
+          enabled: widget.enabled,
+          controller: widget.controller,
+          keyboardType: widget.keyboardType,
+          textInputAction: widget.textInputAction,
+          textCapitalization: widget.textCapitalization,
+          autofillHints: widget.autofillHints,
+          inputFormatters: widget.inputFormatters,
+          validator: widget.validator,
+          onChanged: widget.onChanged,
+          maxLines: widget.maxLines,
+          onTap: widget.onTap,
           decoration: InputDecoration(
-            contentPadding: contentPadding ??
+            contentPadding: widget.contentPadding ??
                 const EdgeInsets.symmetric(vertical: 5, horizontal: 8),
-            suffixIcon: suffixIcon,
-            prefix: prefix,
-            prefixIcon: prefixIcon,
-            hintText: hint,
-            labelText: label,
+            suffixIcon: widget.suffixIcon,
+            prefix: widget.prefix,
+            prefixIcon: widget.prefixIcon,
+            hintText: widget.hint,
+            labelText: widget.label,
             filled: true,
             fillColor: Colors.white,
             focusedBorder: activeBorderStyle,
