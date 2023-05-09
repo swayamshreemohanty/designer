@@ -26,6 +26,7 @@ class ThemeTextFormField extends StatefulWidget {
   final EdgeInsetsGeometry? contentPadding;
   final EdgeInsetsGeometry? textFieldPadding;
   final TextStyle? hintStyle;
+  final TextStyle? labelStyle;
   final TextStyle? style;
 
   ThemeTextFormField({
@@ -53,6 +54,7 @@ class ThemeTextFormField extends StatefulWidget {
     this.contentPadding,
     this.textFieldPadding,
     this.hintStyle,
+    this.labelStyle,
     this.style,
   }) : super(key: key);
 
@@ -98,6 +100,7 @@ class _ThemeTextFormFieldState extends State<ThemeTextFormField> {
           onChanged: widget.onChanged,
           maxLines: widget.maxLines,
           onTap: widget.onTap,
+          style: widget.style,
           decoration: InputDecoration(
             contentPadding: widget.contentPadding ??
                 const EdgeInsets.symmetric(vertical: 5, horizontal: 8),
@@ -105,6 +108,8 @@ class _ThemeTextFormFieldState extends State<ThemeTextFormField> {
             prefix: widget.prefix,
             prefixIcon: widget.prefixIcon,
             hintText: widget.hint,
+            hintStyle: widget.hintStyle,
+            labelStyle: widget.labelStyle,
             labelText: widget.label,
             filled: true,
             fillColor: Colors.white,
