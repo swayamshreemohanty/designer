@@ -28,6 +28,7 @@ class ThemeTextFormField extends StatefulWidget {
   final TextStyle? hintStyle;
   final TextStyle? labelStyle;
   final TextStyle? style;
+  final Color? fillColor;
 
   ThemeTextFormField({
     Key? key,
@@ -56,6 +57,7 @@ class ThemeTextFormField extends StatefulWidget {
     this.hintStyle,
     this.labelStyle,
     this.style,
+    this.fillColor,
   }) : super(key: key);
 
   @override
@@ -112,7 +114,7 @@ class _ThemeTextFormFieldState extends State<ThemeTextFormField> {
             labelStyle: widget.labelStyle,
             labelText: widget.label,
             filled: true,
-            fillColor: Colors.white,
+            fillColor: widget.fillColor ?? Colors.white,
             focusedBorder: activeBorderStyle,
             enabledBorder: deActiveBorderStyle,
             focusedErrorBorder: activeBorderStyle,
