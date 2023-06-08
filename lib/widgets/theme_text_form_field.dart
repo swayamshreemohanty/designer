@@ -29,6 +29,8 @@ class ThemeTextFormField extends StatefulWidget {
   final TextStyle? labelStyle;
   final TextStyle? style;
   final Color? fillColor;
+  final OutlineInputBorder? activeBorderStyle;
+  final OutlineInputBorder? deActiveBorderStyle;
 
   ThemeTextFormField({
     Key? key,
@@ -58,6 +60,8 @@ class ThemeTextFormField extends StatefulWidget {
     this.labelStyle,
     this.style,
     this.fillColor,
+    this.activeBorderStyle,
+    this.deActiveBorderStyle,
   }) : super(key: key);
 
   @override
@@ -71,15 +75,17 @@ class _ThemeTextFormFieldState extends State<ThemeTextFormField> {
   void initState() {
     super.initState();
 
-    activeBorderStyle = OutlineInputBorder(
-      borderSide: BorderSide(width: 1, color: Colors.grey.shade400),
-      borderRadius: BorderRadius.circular(widget.borderRadius ?? 10),
-    );
+    activeBorderStyle = widget.activeBorderStyle ??
+        OutlineInputBorder(
+          borderSide: BorderSide(width: 1, color: Colors.grey.shade400),
+          borderRadius: BorderRadius.circular(widget.borderRadius ?? 10),
+        );
 
-    deActiveBorderStyle = OutlineInputBorder(
-      borderSide: BorderSide(width: 1, color: Colors.grey.shade200),
-      borderRadius: BorderRadius.circular(widget.borderRadius ?? 10),
-    );
+    deActiveBorderStyle = widget.deActiveBorderStyle ??
+        OutlineInputBorder(
+          borderSide: BorderSide(width: 1, color: Colors.grey.shade200),
+          borderRadius: BorderRadius.circular(widget.borderRadius ?? 10),
+        );
   }
 
   @override
