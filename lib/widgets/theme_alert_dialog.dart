@@ -105,6 +105,9 @@ Future<void> showThemeAlertDialog({
   required BuildContext context,
   required void Function() onAcceptPressed,
   required String title,
+  String? agreeButtonText,
+  String? cancelButtonText,
+  void Function()? onRejectPressed,
 }) async {
   HapticFeedback.mediumImpact();
   await showDialog(
@@ -112,7 +115,10 @@ Future<void> showThemeAlertDialog({
     useSafeArea: true,
     builder: (context) => ThemeAlertDialog(
       title: title,
+      agreeButtonText: agreeButtonText,
+      cancelButtonText: cancelButtonText,
       onAcceptPressed: onAcceptPressed,
+      onRejectPressed: onRejectPressed,
     ),
   );
 }
