@@ -1,7 +1,8 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 
-class ThemeTextFormFieldDropDown<T> extends StatelessWidget {
+class ThemeTextFormFieldDropDown<T> extends StatefulWidget {
+  final T? value;
   final List<DropdownMenuItem<T>> items;
   final void Function(T?)? onChanged;
   final TextInputType? keyboardType;
@@ -11,7 +12,13 @@ class ThemeTextFormFieldDropDown<T> extends StatelessWidget {
   final String? hint;
   final int? maxLines;
   final Widget? prefixIcon;
-  final T? value;
+  final TextStyle? hintStyle;
+  final TextStyle? labelStyle;
+  final Color? fillColor;
+  final TextStyle? style;
+  final double? borderRadius;
+  final OutlineInputBorder? activeBorderStyle;
+  final OutlineInputBorder? deActiveBorderStyle;
 
   const ThemeTextFormFieldDropDown({
     Key? key,
@@ -22,41 +29,65 @@ class ThemeTextFormFieldDropDown<T> extends StatelessWidget {
     this.validator,
     this.label,
     this.hint,
+    this.borderRadius,
     this.prefixIcon,
     this.maxLines = 1,
     this.value,
+    this.hintStyle,
+    this.labelStyle,
+    this.fillColor,
+    this.style,
+    this.activeBorderStyle,
+    this.deActiveBorderStyle,
   }) : super(key: key);
+
+  @override
+  State<ThemeTextFormFieldDropDown<T>> createState() =>
+      _ThemeTextFormFieldDropDownState<T>();
+}
+
+class _ThemeTextFormFieldDropDownState<T>
+    extends State<ThemeTextFormFieldDropDown<T>> {
+  late OutlineInputBorder activeBorderStyle;
+  late OutlineInputBorder deActiveBorderStyle;
+  @override
+  void initState() {
+    super.initState();
+
+    activeBorderStyle = widget.activeBorderStyle ??
+        OutlineInputBorder(
+          borderSide: BorderSide(width: 1, color: Colors.grey.shade400),
+          borderRadius: BorderRadius.circular(widget.borderRadius ?? 10),
+        );
+
+    deActiveBorderStyle = widget.deActiveBorderStyle ??
+        OutlineInputBorder(
+          borderSide: BorderSide(width: 1, color: Colors.grey.shade200),
+          borderRadius: BorderRadius.circular(widget.borderRadius ?? 10),
+        );
+  }
 
   @override
   Widget build(BuildContext context) => Padding(
         padding: const EdgeInsets.only(top: 12),
         child: DropdownButtonFormField<T>(
-          value: value,
-          items: items,
-          onChanged: onChanged,
-          validator: validator,
+          value: widget.value,
+          items: widget.items,
+          onChanged: widget.onChanged,
+          validator: widget.validator,
           decoration: InputDecoration(
-            prefixIcon: prefixIcon,
-            labelText: label,
-            hintText: hint,
+            prefixIcon: widget.prefixIcon,
+            labelText: widget.label,
+            hintText: widget.hint,
+            hintStyle: widget.hintStyle,
+            labelStyle: widget.labelStyle,
             filled: true,
-            fillColor: Colors.white,
-            focusedBorder: OutlineInputBorder(
-              borderSide: BorderSide(width: 1, color: Colors.grey.shade600),
-              borderRadius: BorderRadius.circular(15),
-            ),
-            enabledBorder: OutlineInputBorder(
-              borderSide: BorderSide(width: 1, color: Colors.grey.shade400),
-              borderRadius: BorderRadius.circular(15),
-            ),
-            focusedErrorBorder: OutlineInputBorder(
-              borderSide: BorderSide(width: 1, color: Colors.grey.shade600),
-              borderRadius: BorderRadius.circular(15),
-            ),
-            errorBorder: OutlineInputBorder(
-              borderSide: BorderSide(width: 1, color: Colors.grey.shade400),
-              borderRadius: BorderRadius.circular(15),
-            ),
+            fillColor: widget.fillColor ?? Colors.white,
+            focusedBorder: activeBorderStyle,
+            enabledBorder: deActiveBorderStyle,
+            focusedErrorBorder: activeBorderStyle,
+            errorBorder: deActiveBorderStyle,
+            disabledBorder: deActiveBorderStyle,
           ),
         ),
       );
