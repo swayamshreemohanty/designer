@@ -24,6 +24,7 @@ class ThemeTypeAheadFormField<T> extends StatelessWidget {
   final T? value;
   final Widget? suffixIcon;
   final TextStyle? hintStyle;
+  final TextStyle? style;
   final Widget? prefixIcon;
   final EdgeInsetsGeometry? contentPadding;
 
@@ -49,6 +50,7 @@ class ThemeTypeAheadFormField<T> extends StatelessWidget {
     this.suffixIcon,
     this.prefixIcon,
     this.hintStyle,
+    this.style,
     this.contentPadding,
   }) : super(key: key);
 
@@ -80,6 +82,7 @@ class ThemeTypeAheadFormField<T> extends StatelessWidget {
           onChanged: onChanged,
           maxLines: maxLines,
           onTap: onTap,
+          style: style,
           decoration: InputDecoration(
             contentPadding: contentPadding,
             prefixIcon: prefixIcon,
