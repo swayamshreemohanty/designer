@@ -1,10 +1,11 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_typeahead/flutter_typeahead.dart';
 
-class ThemeTypeAheadFormField<T> extends StatelessWidget {
+class ThemeTypeAheadFormField<T> extends StatefulWidget {
   final TextEditingController controller;
   final TextInputType? keyboardType;
   final TextInputAction? textInputAction;
@@ -27,6 +28,9 @@ class ThemeTypeAheadFormField<T> extends StatelessWidget {
   final TextStyle? style;
   final Widget? prefixIcon;
   final EdgeInsetsGeometry? contentPadding;
+  final double? borderRadius;
+  final OutlineInputBorder? activeBorderStyle;
+  final OutlineInputBorder? deActiveBorderStyle;
 
   ThemeTypeAheadFormField({
     Key? key,
@@ -48,47 +52,64 @@ class ThemeTypeAheadFormField<T> extends StatelessWidget {
     this.noItemsFoundBuilder,
     this.value,
     this.suffixIcon,
-    this.prefixIcon,
     this.hintStyle,
     this.style,
+    this.prefixIcon,
     this.contentPadding,
+    this.borderRadius,
+    this.activeBorderStyle,
+    this.deActiveBorderStyle,
   }) : super(key: key);
 
-  final OutlineInputBorder activeBorderStyle = OutlineInputBorder(
-    borderSide: const BorderSide(
-      color: Color(0xffCECECE),
-      width: 1.2,
-    ),
-    borderRadius: BorderRadius.circular(6),
-  );
-  final OutlineInputBorder deActiveBorderStyle = OutlineInputBorder(
-    borderSide: BorderSide(width: 1, color: Colors.grey.shade400),
-    borderRadius: BorderRadius.circular(6),
-  );
+  @override
+  State<ThemeTypeAheadFormField<T>> createState() =>
+      _ThemeTypeAheadFormFieldState<T>();
+}
+
+class _ThemeTypeAheadFormFieldState<T>
+    extends State<ThemeTypeAheadFormField<T>> {
+  late OutlineInputBorder activeBorderStyle;
+  late OutlineInputBorder deActiveBorderStyle;
+  @override
+  void initState() {
+    super.initState();
+
+    activeBorderStyle = widget.activeBorderStyle ??
+        OutlineInputBorder(
+          borderSide: BorderSide(width: 1, color: Colors.grey.shade400),
+          borderRadius: BorderRadius.circular(widget.borderRadius ?? 10),
+        );
+
+    deActiveBorderStyle = widget.deActiveBorderStyle ??
+        OutlineInputBorder(
+          borderSide: BorderSide(width: 1, color: Colors.grey.shade200),
+          borderRadius: BorderRadius.circular(widget.borderRadius ?? 10),
+        );
+  }
 
   @override
   Widget build(BuildContext context) => TypeAheadFormField<T>(
-        itemBuilder: itemBuilder,
+        itemBuilder: widget.itemBuilder,
         autoFlipDirection: true,
-        onSuggestionSelected: onSuggestionSelected,
-        suggestionsCallback: suggestionsCallback,
-        noItemsFoundBuilder: noItemsFoundBuilder,
+        onSuggestionSelected: widget.onSuggestionSelected,
+        suggestionsCallback: widget.suggestionsCallback,
+        noItemsFoundBuilder: widget.noItemsFoundBuilder,
         textFieldConfiguration: TextFieldConfiguration(
-          enabled: enabled,
-          controller: controller,
-          textInputAction: textInputAction,
-          textCapitalization: textCapitalization,
-          inputFormatters: inputFormatters,
-          onChanged: onChanged,
-          maxLines: maxLines,
-          onTap: onTap,
-          style: style,
+          enabled: widget.enabled,
+          controller: widget.controller,
+          textInputAction: widget.textInputAction,
+          textCapitalization: widget.textCapitalization,
+          inputFormatters: widget.inputFormatters,
+          onChanged: widget.onChanged,
+          maxLines: widget.maxLines,
+          onTap: widget.onTap,
+          style: widget.style,
           decoration: InputDecoration(
-            contentPadding: contentPadding,
-            prefixIcon: prefixIcon,
-            suffixIcon: suffixIcon,
-            hintText: label,
-            hintStyle: hintStyle,
+            contentPadding: widget.contentPadding,
+            prefixIcon: widget.prefixIcon,
+            suffixIcon: widget.suffixIcon,
+            hintText: widget.label,
+            hintStyle: widget.hintStyle,
             filled: true,
             fillColor: Colors.white,
             focusedBorder: activeBorderStyle,
@@ -98,6 +119,6 @@ class ThemeTypeAheadFormField<T> extends StatelessWidget {
             disabledBorder: deActiveBorderStyle,
           ),
         ),
-        validator: validator,
+        validator: widget.validator,
       );
 }
