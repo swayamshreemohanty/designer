@@ -19,6 +19,8 @@ class ThemeTextFormFieldDropDown<T> extends StatefulWidget {
   final double? borderRadius;
   final OutlineInputBorder? activeBorderStyle;
   final OutlineInputBorder? deActiveBorderStyle;
+  final EdgeInsetsGeometry? contentPadding;
+  final EdgeInsetsGeometry? textFieldPadding;
 
   const ThemeTextFormFieldDropDown({
     Key? key,
@@ -39,6 +41,8 @@ class ThemeTextFormFieldDropDown<T> extends StatefulWidget {
     this.style,
     this.activeBorderStyle,
     this.deActiveBorderStyle,
+    this.contentPadding,
+    this.textFieldPadding,
   }) : super(key: key);
 
   @override
@@ -69,13 +73,17 @@ class _ThemeTextFormFieldDropDownState<T>
 
   @override
   Widget build(BuildContext context) => Padding(
-        padding: const EdgeInsets.only(top: 12),
+        padding: widget.textFieldPadding == null
+            ? EdgeInsets.zero
+            : widget.textFieldPadding!,
         child: DropdownButtonFormField<T>(
           value: widget.value,
           items: widget.items,
           onChanged: widget.onChanged,
           validator: widget.validator,
           decoration: InputDecoration(
+            contentPadding: widget.contentPadding ??
+                const EdgeInsets.symmetric(vertical: 5, horizontal: 8),
             prefixIcon: widget.prefixIcon,
             labelText: widget.label,
             hintText: widget.hint,
