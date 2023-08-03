@@ -33,7 +33,7 @@ class ThemeTextFormField extends StatefulWidget {
   final OutlineInputBorder? activeBorderStyle;
   final OutlineInputBorder? deActiveBorderStyle;
 
-  ThemeTextFormField({
+  const ThemeTextFormField({
     Key? key,
     this.initialValue,
     this.controller,
