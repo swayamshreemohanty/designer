@@ -73,10 +73,13 @@ class ThemeTextFormField extends StatefulWidget {
 class _ThemeTextFormFieldState extends State<ThemeTextFormField> {
   late OutlineInputBorder activeBorderStyle;
   late OutlineInputBorder deActiveBorderStyle;
+
+  String? initialValue;
+
   @override
   void initState() {
     super.initState();
-
+    initialValue = widget.initialValue;
     activeBorderStyle = widget.activeBorderStyle ??
         OutlineInputBorder(
           borderSide: BorderSide(width: 1, color: Colors.grey.shade400),
@@ -91,12 +94,20 @@ class _ThemeTextFormFieldState extends State<ThemeTextFormField> {
   }
 
   @override
+  void didUpdateWidget(covariant ThemeTextFormField oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (oldWidget != widget) {
+      initialValue = widget.initialValue;
+    }
+  }
+
+  @override
   Widget build(BuildContext context) => Padding(
         padding: widget.textFieldPadding == null
             ? EdgeInsets.zero
             : widget.textFieldPadding!,
         child: TextFormField(
-          initialValue: widget.initialValue,
+          initialValue: initialValue,
           maxLength: widget.maxLength,
           obscureText: widget.obscureText,
           readOnly: widget.readOnly,
