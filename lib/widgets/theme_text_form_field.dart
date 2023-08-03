@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 class ThemeTextFormField extends StatefulWidget {
+  final String? initialValue;
   final TextEditingController? controller;
   final TextInputType? keyboardType;
   final TextInputAction? textInputAction;
@@ -34,6 +35,7 @@ class ThemeTextFormField extends StatefulWidget {
 
   ThemeTextFormField({
     Key? key,
+    this.initialValue,
     this.controller,
     this.keyboardType,
     this.textInputAction,
@@ -94,6 +96,7 @@ class _ThemeTextFormFieldState extends State<ThemeTextFormField> {
             ? EdgeInsets.zero
             : widget.textFieldPadding!,
         child: TextFormField(
+          initialValue: widget.initialValue,
           maxLength: widget.maxLength,
           obscureText: widget.obscureText,
           readOnly: widget.readOnly,
