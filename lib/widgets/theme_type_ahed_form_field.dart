@@ -31,6 +31,7 @@ class ThemeTypeAheadFormField<T> extends StatefulWidget {
   final double? borderRadius;
   final OutlineInputBorder? activeBorderStyle;
   final OutlineInputBorder? deActiveBorderStyle;
+  final AxisDirection direction;
 
   ThemeTypeAheadFormField({
     Key? key,
@@ -59,6 +60,7 @@ class ThemeTypeAheadFormField<T> extends StatefulWidget {
     this.borderRadius,
     this.activeBorderStyle,
     this.deActiveBorderStyle,
+    this.direction = AxisDirection.down,
   }) : super(key: key);
 
   @override
@@ -89,6 +91,7 @@ class _ThemeTypeAheadFormFieldState<T>
 
   @override
   Widget build(BuildContext context) => TypeAheadFormField<T>(
+        direction: widget.direction,
         itemBuilder: widget.itemBuilder,
         autoFlipDirection: true,
         onSuggestionSelected: widget.onSuggestionSelected,
