@@ -32,6 +32,7 @@ class ThemeTextFormField extends StatefulWidget {
   final Color? fillColor;
   final OutlineInputBorder? activeBorderStyle;
   final OutlineInputBorder? deActiveBorderStyle;
+  final FocusNode? focusNode;
 
   const ThemeTextFormField({
     Key? key,
@@ -64,6 +65,7 @@ class ThemeTextFormField extends StatefulWidget {
     this.fillColor,
     this.activeBorderStyle,
     this.deActiveBorderStyle,
+    this.focusNode,
   }) : super(key: key);
 
   @override
@@ -107,6 +109,7 @@ class _ThemeTextFormFieldState extends State<ThemeTextFormField> {
             ? EdgeInsets.zero
             : widget.textFieldPadding!,
         child: TextFormField(
+          focusNode: widget.focusNode,
           initialValue: initialValue,
           maxLength: widget.maxLength,
           obscureText: widget.obscureText,
