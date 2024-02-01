@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 class ThemeElevatedButton extends StatelessWidget {
   final String buttonName;
+  final Widget? suffix;
   final bool showLoadingSpinner;
   final void Function()? onPressed;
   final EdgeInsetsGeometry? padding;
@@ -19,6 +20,7 @@ class ThemeElevatedButton extends StatelessWidget {
     this.showLoadingSpinner = false,
     this.disableButton = false,
     required this.buttonName,
+    this.suffix,
     this.onPressed,
     this.textFontSize = 15,
     this.loadingSpinnerSize = 30,
@@ -62,13 +64,18 @@ class ThemeElevatedButton extends StatelessWidget {
                     color: foregroundColor ?? Colors.white,
                     size: loadingSpinnerSize,
                   )
-                : Text(
-                    buttonName,
-                    style: TextStyle(
-                      color: foregroundColor ?? Colors.white,
-                      fontSize: textFontSize,
-                      fontWeight: FontWeight.w500,
-                    ),
+                : Row(
+                    children: [
+                      Text(
+                        buttonName,
+                        style: TextStyle(
+                          color: foregroundColor ?? Colors.white,
+                          fontSize: textFontSize,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                      if (suffix != null) suffix!,
+                    ],
                   ),
           ),
         ),
