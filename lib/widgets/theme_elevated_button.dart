@@ -65,6 +65,7 @@ class ThemeElevatedButton extends StatelessWidget {
                     size: loadingSpinnerSize,
                   )
                 : Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
                         buttonName,
